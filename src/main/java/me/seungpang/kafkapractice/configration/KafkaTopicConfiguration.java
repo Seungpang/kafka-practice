@@ -12,7 +12,9 @@ public class KafkaTopicConfiguration {
     public NewTopics seungpangs() {
         return new NewTopics(
                 TopicBuilder.name("seungpang").build(),
-                TopicBuilder.name("seungpang-bytes").build()
+                TopicBuilder.name("seungpang-bytes").build(),
+                TopicBuilder.name("seungpang-request").build(),
+                TopicBuilder.name("seungpang-replies").build()
         );
     }
 }

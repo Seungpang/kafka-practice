@@ -21,6 +21,7 @@ public class KafkaPracticeApplication {
             seungpangProducer.sync("seungpang", "Hello, seungpang-sync");
             seungpangProducer.routingSend("seungpang", "Hello, seungpang-routing");
             seungpangProducer.routingSend("seungpang-bytes", "Hello, seungpang-bytes".getBytes(StandardCharsets.UTF_8));
+            seungpangProducer.replyingSend("seungpang-request", "Ping seungpang");
         };
     }
 }
