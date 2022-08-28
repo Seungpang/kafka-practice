@@ -1,5 +1,6 @@
 package me.seungpang.kafkapractice;
 
+import java.nio.charset.StandardCharsets;
 import me.seungpang.kafkapractice.producer.SeungpangProducer;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,7 +19,8 @@ public class KafkaPracticeApplication {
         return args -> {
             seungpangProducer.async("seungpang", "Hello, seungpang-async");
             seungpangProducer.sync("seungpang", "Hello, seungpang-sync");
-            Thread.sleep(1000L);
+            seungpangProducer.routingSend("seungpang", "Hello, seungpang-routing");
+            seungpangProducer.routingSend("seungpang-bytes", "Hello, seungpang-bytes".getBytes(StandardCharsets.UTF_8));
         };
     }
 }

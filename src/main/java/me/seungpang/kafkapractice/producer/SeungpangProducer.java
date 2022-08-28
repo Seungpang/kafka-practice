@@ -7,6 +7,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.kafka.core.KafkaProducerException;
 import org.springframework.kafka.core.KafkaSendCallback;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.core.RoutingKafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
@@ -15,9 +16,12 @@ import org.springframework.util.concurrent.ListenableFuture;
 public class SeungpangProducer {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
+    private final RoutingKafkaTemplate routingKafkaTemplate;
 
-    public SeungpangProducer(final KafkaTemplate<String, String> kafkaTemplate) {
+    public SeungpangProducer(final KafkaTemplate<String, String> kafkaTemplate,
+                             final RoutingKafkaTemplate routingKafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
+        this.routingKafkaTemplate = routingKafkaTemplate;
     }
 
     public void async(String topic, String message) {
@@ -48,5 +52,13 @@ public class SeungpangProducer {
         } catch (TimeoutException e) {
             e.printStackTrace();
         }
+    }
+
+    public void routingSend(String topic, String message) {
+        routingKafkaTemplate.send(topic, message);
+    }
+
+    public void routingSend(String topic, byte[] message) {
+        routingKafkaTemplate.send(topic, message);
     }
 }
